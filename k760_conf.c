@@ -88,8 +88,6 @@ int main(int argc, char **argv)
 		printf("\n");
 	}
 
-	switch()
-
 	while ((c = getopt (argc, argv, "d:f:")) != -1)
 	{
 		switch (c)
