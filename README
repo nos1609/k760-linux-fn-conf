@@ -1,3 +1,14 @@
 This repo merges code from http://askubuntu.com/questions/326959/how-can-i-make-the-function-keys-the-default-on-a-logitech-k760-bluetooh-keyboar and http://www.trial-n-error.de/posts/2012/12/31/logitech-k810-keyboard-configurator/
 
 ##Only for K760
+
+---------------->8--------------------
+
+How to get the code sequences for enable/disable FN key:
+
+Use the Bluetooth packet logger utility (download with Apple developer account)
+to capture the packets sent from your logitech keyboard.
+
+See screenshot osx_bluetooth_debugging.png file for an example.
+Look for the code on the "ACL SEND" lines.
+
