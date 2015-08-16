@@ -35,8 +35,8 @@
 const char k810_seq_fkeys_on[]  = {0x10, 0xff, 0x06, 0x15, 0x00, 0x00, 0x00};
 const char k810_seq_fkeys_off[] = {0x10, 0xff, 0x06, 0x15, 0x01, 0x00, 0x00};
 
-const char k760_seq_fkeys_on[] = {0x10, 0xff, 0x05, 0x14, 0x00, 0x00, 0x00};
-const char k760_seq_fkeys_off[]  = {0x10, 0xff, 0x05, 0x14, 0x01, 0x00, 0x00};
+const char k760_seq_fkeys_on[] = {0x10, 0xff, 0x05, 0x15, 0x01, 0x00, 0x00};
+const char k760_seq_fkeys_off[]  = {0x10, 0xff, 0x05, 0x15, 0x00, 0x00, 0x00};
 
 const char opt_on[]  = "on";
 const char opt_off[] = "off";
@@ -151,10 +151,10 @@ int main(int argc, char **argv)
 		    info.vendor  != HID_VENDOR_ID_LOGITECH ||
 		    info.product != HID_DEVICE_ID_K760)
 		{
-			errno = EPERM;
-			perror("The given device is not a supported "
-			       "Logitech keyboard");
-			return 1;
+			//errno = EPERM;
+			//perror("The given device is not a supported "
+			//       "Logitech keyboard");
+			//return 1;
 		}
 	}
 
