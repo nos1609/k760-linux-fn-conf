@@ -30,7 +30,7 @@
 
 #define HID_VENDOR_ID_LOGITECH			(__u32)0x046d
 #define HID_DEVICE_ID_K810              (__s16)0xb319
-#define HID_DEVICE_ID_K760              (__s16)0xb316
+#define HID_DEVICE_ID_K760              (__s16)0xb318
 
 const char k810_seq_fkeys_on[]  = {0x10, 0xff, 0x06, 0x15, 0x00, 0x00, 0x00};
 const char k810_seq_fkeys_off[] = {0x10, 0xff, 0x06, 0x15, 0x01, 0x00, 0x00};
