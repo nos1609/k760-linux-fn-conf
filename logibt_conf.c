@@ -30,13 +30,17 @@
 
 #define HID_VENDOR_ID_LOGITECH			(__u32)0x046d
 #define HID_DEVICE_ID_K810              (__s16)0xb319
-#define HID_DEVICE_ID_K760              (__s16)0xb316
+#define HID_DEVICE_ID_K760_1             (__s16)0xb318 //EU
+#define HID_DEVICE_ID_K760_2              (__s16)0xb316 //GB
 
 const char k810_seq_fkeys_on[]  = {0x10, 0xff, 0x06, 0x15, 0x00, 0x00, 0x00};
 const char k810_seq_fkeys_off[] = {0x10, 0xff, 0x06, 0x15, 0x01, 0x00, 0x00};
 
-const char k760_seq_fkeys_on[] = {0x10, 0xff, 0x05, 0x14, 0x00, 0x00, 0x00};
-const char k760_seq_fkeys_off[]  = {0x10, 0xff, 0x05, 0x14, 0x01, 0x00, 0x00};
+const char k760_1_seq_fkeys_on[] = {0x10, 0xff, 0x05, 0x14, 0x01, 0x00, 0x00};
+const char k760_1_seq_fkeys_off[]  = {0x10, 0xff, 0x05, 0x14, 0x00, 0x00, 0x00};
+
+const char k760_2_seq_fkeys_on[] = {0x10, 0xff, 0x05, 0x15, 0x01, 0x00, 0x00};
+const char k760_2_seq_fkeys_off[] = {0x10, 0xff, 0x05, 0x15, 0x00, 0x00, 0x00};
 
 const char opt_on[]  = "on";
 const char opt_off[] = "off";
@@ -139,7 +143,7 @@ int main(int argc, char **argv)
 		return 1;
 	}
 
-	/* Get Raw Info */
+	/* Get Raw Info K810 */
 	res = ioctl(fd, HIDIOCGRAWINFO, &info);
 	if (res < 0)
 	{
@@ -149,22 +153,96 @@ int main(int argc, char **argv)
        	{
 		if (info.bustype != BUS_BLUETOOTH || 
 		    info.vendor  != HID_VENDOR_ID_LOGITECH ||
-		    info.product != HID_DEVICE_ID_K760)
+		    info.product != HID_DEVICE_ID_K810)
 		{
-			errno = EPERM;
-			perror("The given device is not a supported "
-			       "Logitech keyboard");
-			return 1;
+			//errno = EPERM;
+			//perror("The given device is not a supported "
+			//       "Logitech keyboard");
+			//return 1;
 		}
 	}
 
 	if (flag_fkeys)
 	{
-		send(fd, k760_seq_fkeys_on,  sizeof(k760_seq_fkeys_on));
+		send(fd, k810_seq_fkeys_on,  sizeof(k810_seq_fkeys_on));
 	}
 	else
 	{
-		send(fd, k760_seq_fkeys_off, sizeof(k760_seq_fkeys_off));
+		send(fd, k810_seq_fkeys_off, sizeof(k810_seq_fkeys_off));
+	}
+
+	close(fd);
+	/* Open the Device with non-blocking reads. */
+	fd = open(dev, O_RDWR|O_NONBLOCK);
+	if (fd < 0)
+	{
+		perror("Unable to open device");
+		return 1;
+	}
+
+	/* Get Raw Info K760 EU */
+	res = ioctl(fd, HIDIOCGRAWINFO, &info);
+	if (res < 0)
+	{
+		perror("error while getting info from device");
+	}
+	else
+       	{
+		if (info.bustype != BUS_BLUETOOTH || 
+		    info.vendor  != HID_VENDOR_ID_LOGITECH ||
+		    info.product != HID_DEVICE_ID_K760_1)
+		{
+			//errno = EPERM;
+			//perror("The given device is not a supported "
+			//       "Logitech keyboard");
+			//return 1;
+		}
+	}
+
+	if (flag_fkeys)
+	{
+		send(fd, k760_1_seq_fkeys_on,  sizeof(k760_1_seq_fkeys_on));
+	}
+	else
+	{
+		send(fd, k760_1_seq_fkeys_off, sizeof(k760_1_seq_fkeys_off));
+	}
+
+	close(fd);
+	/* Open the Device with non-blocking reads. */
+	fd = open(dev, O_RDWR|O_NONBLOCK);
+	if (fd < 0)
+	{
+		perror("Unable to open device");
+		return 1;
+	}
+
+	/* Get Raw Info K760GB */
+	res = ioctl(fd, HIDIOCGRAWINFO, &info);
+	if (res < 0)
+	{
+		perror("error while getting info from device");
+	}
+	else
+       	{
+		if (info.bustype != BUS_BLUETOOTH || 
+		    info.vendor  != HID_VENDOR_ID_LOGITECH ||
+		    info.product != HID_DEVICE_ID_K760_2)
+		{
+			//errno = EPERM;
+			//perror("The given device is not a supported "
+			//       "Logitech keyboard");
+			//return 1;
+		}
+	}
+
+	if (flag_fkeys)
+	{
+		send(fd, k760_2_seq_fkeys_on,  sizeof(k760_2_seq_fkeys_on));
+	}
+	else
+	{
+		send(fd, k760_2_seq_fkeys_off, sizeof(k760_2_seq_fkeys_off));
 	}
 
 	close(fd);
