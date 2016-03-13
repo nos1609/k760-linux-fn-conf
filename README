@@ -1,3 +1,6 @@
 This repo merges code from http://askubuntu.com/questions/326959/how-can-i-make-the-function-keys-the-default-on-a-logitech-k760-bluetooh-keyboar and http://www.trial-n-error.de/posts/2012/12/31/logitech-k810-keyboard-configurator/
 
-##Only for K760
+Combined for 3 different Logitech keyboard models:
+  K810
+  K760 EU layout aka L-type return key
+  K760 GB layout (don't really know how does it look like)
