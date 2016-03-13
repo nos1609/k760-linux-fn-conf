@@ -1,0 +1,1 @@
+ACTION=="add", SUBSYSTEM=="hidraw", ATTRS{address}=="YOUR_KBD_MAC_HERE", RUN+="/bin/bash -c '/usr/bin/logibt-conf -d $DEVNAME -f on'"
